@@ -1,0 +1,201 @@
+body{
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    overflow: hidden;
+}
+.background{
+    background-image:url(../images/background-img.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*-----------------instructions------------------------*/
+#instructions_background{
+    background-image:url(../images/instructions_background.jpg);
+}
+
+#instructions_background img{
+    width: 100vw;
+    animation: disappear 2s;
+    position:absolute;
+}
+#instructions_background p{
+    padding: 7vw;
+    font-size: 2vw;
+    color: white;
+}
+
+#instructions_background a{
+    padding: 1.5vw;
+    text-decoration: none;
+    font-size: 3.5vh;
+    border-radius: 5px;
+}
+
+@keyframes disappear {
+    0% {
+        opacity: 100%;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100%{
+        opacity: 0%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #instructions_background p{
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #instructions_background img{
+        height: 100vh;
+        width: auto;
+    }
+}
+/*----------------login--------------------------------
+/* הרקע האפור  */
+.dark-background {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(9,0,40,0.4);
+}
+
+/* הכרטיס הלבן */
+.content {
+    background-color: #120c29;
+    box-shadow: 0px 0px 20px rgb(255, 213, 61);
+    height: 80vh;
+    width: 37vw; /* Could be more or less, depending on screen size */
+    border-radius: 8px;
+}
+/* Zoom Animation */
+.growAnimate {
+    animation: animatezoom 0.6s;
+}
+
+.smallAnimate {
+    animation: animatezoom 1s reverse infinite;
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+.container {
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Comic Sans MS';
+    padding: 4vw;
+    color: white;
+}
+span {
+    color: #ffb500;
+    text-shadow: 0px 0px 15px #ffb500;
+    font-size: 5vh;
+}
+label{
+    padding-left: 8%;
+    color: white;
+}
+input, select {
+    width: 80%;
+    border: none;
+    font-family: 'Comic Sans MS';
+    box-sizing: border-box;
+    margin-bottom: 1vw;
+    box-shadow: 0 0 8px rgb(255 255 255 / 52%);
+    border-radius: 5px;
+    margin-left: 8%;
+    display: block;
+    padding: 0.5vh;
+    font-size: 2vh;
+    background-color: #120c29;
+    color: white;
+}
+.toGame {
+    font-size: 3vh;
+    width: 100%;
+    background-color: #ffb500;
+    box-shadow: 0px 0px 20px #ffb500;
+    color: white;
+    height: 7vh;
+    border: none;
+    cursor: pointer;
+    font-family: 'Comic Sans MS';
+    margin: 3vw 0;
+}
+
+@media screen and (max-width: 1200px) {
+    .toGame {
+        min-height: 45px;
+    }
+
+    .content {
+        width: 70vw;
+    }
+}
+
+/*----------------game----------------------------------*/
+table img{
+    height: 10vh;
+}
+#timer{
+    position: absolute;
+    left:10vw;
+    top: 5vw;
+    font-size: 50px;
+    text-shadow: 0px 0px 8px ;
+}
+.light{
+    animation:animateLight 1s infinite reverse ;
+}
+@keyframes animateLight {
+    from {
+        opacity: 0%;
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
+/*----------------results----------------------------------*/
+/* הרקע האפור  */
+#results p{
+    display: inline;
+    font-size: 4vh;
+    line-height: 8vh;
+}
+.score {
+    color: #ffb500;
+    text-shadow: 0px 0px 15px #ffb500;
+}
+#generalPeak{
+    padding-left: 8%
+}
+#peak,#victories{
+    padding-left: 16%
+}
+#scores{
+    padding-left: 24%
+}
+#peakGamer{
+    padding-left: 8%
+}

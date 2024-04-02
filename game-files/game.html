@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lights game</title>
+    <link href="css/game.css" rel="stylesheet" />
+    <link href="css/loading.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="background">
+        <div id="login" class="dark-background">
+            <form onsubmit="return false;" class="content growAnimate">
+                <div class="container">
+                    <span> Welcome to the game !! </span><br>
+                    Enter your name and password,<br>Choose the level you wants and.... Forward!
+                </div>
+                <label for="userName">name</label>
+                <input type="text" name="userName" />
+                <label for="password">password</label>
+                <input type="password" name="password" />
+                <label for="level">level</label>
+                <select name="level">
+                    <option value="1">level 1</option>
+                    <option value="2">level 2</option>
+                </select>
+                <input type="submit" class="toGame" value="start game" />
+            </form>
+        </div>
+        <!--loding-->
+        <div id="out">
+            <div id="fade-in">
+                <div id="container-loading">
+                    <div class="common"></div>
+                    <div class="common"></div>
+                    <div class="common"></div>
+                    <div class="common"></div>
+                    <div class="common"></div>
+                    <div class="common"></div>
+                    <div class="common"></div>
+                    <div class="common"></div>
+                </div>
+                <div id="bar">
+                    <div id="progress"></div>
+                </div>
+            </div>
+        </div>
+        <p id="timer"></p>
+        <!-- <button id="pause">pause</button> -->
+        <table>
+            <tr>
+                <td><img src="images/off.jpg" id="1"></td>
+                <td><img src="images/off.jpg" id="2"></td>
+                <td><img src="images/off.jpg" id="3"></td>
+                <td><img src="images/off.jpg" id="4"></td>
+            </tr>
+            <tr>
+                <td><img src="images/off.jpg" id="5"></td>
+                <td><img src="images/off.jpg" id="6"></td>
+                <td><img src="images/off.jpg" id="7"></td>
+                <td><img src="images/off.jpg" id="8"></td>
+            </tr>
+            <tr>
+                <td><img src="images/off.jpg" id="9"></td>
+                <td><img src="images/off.jpg" id="10"></td>
+                <td><img src="images/off.jpg" id="11"></td>
+                <td><img src="images/off.jpg" id="12"></td>
+            </tr>
+            <tr>
+                <td><img src="images/off.jpg" id="13"></td>
+                <td><img src="images/off.jpg" id="14"></td>
+                <td><img src="images/off.jpg" id="15"></td>
+                <td><img src="images/off.jpg" id="16"></td>
+            </tr>
+            <tr>
+                <td><img src="images/off.jpg" id="17"></td>
+                <td><img src="images/off.jpg" id="18"></td>
+                <td><img src="images/off.jpg" id="19"></td>
+                <td><img src="images/off.jpg" id="20"></td>
+            </tr>
+        </table>
+        <div id="results" class="dark-background">
+            <div class="content growAnimate">
+                <div class="container">
+                    <p>scores</p>
+                    <p id="scores" class="score"></p><br>
+                    <p>victories</p>
+                    <p id="victories" class="score"></p><br>
+                    <p>your peak</p>
+                    <p id="peak" class="score"></p><br>
+                    <p>general peak</p>
+                    <p id="generalPeak" class="score"></p><br>
+                    <p>peak gamer</p>
+                    <p id="peakGamer" class="score"></p><br>
+                </div>
+                <button class="toGame">restart</button>
+            </div>
+        </div>
+        <audio id="log-in-music" src="audio/log-in-music.mp3" loop></audio>
+        <audio id="game-process-music" src="audio/game-process-music.mp3" loop></audio>
+        <audio id="result-music" src="audio/result-music.mp3" loop></audio>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>
