@@ -37,14 +37,6 @@ Lights Game is an interactive memory-based game where players must remember and 
 - **User Scores:** The game saves each player's score locally, allowing them to track their progress over time.
 - **High Scores:** The highest score across all users is also saved and displayed on the results screen.
 
-## Customization
-Feel free to modify the game's code to adjust the number of rooms, timing, scoring system, or add new features.
-
-## Future Enhancements
-- **Additional Levels:** More difficulty levels with varying game dynamics.
-- **Online Leaderboard:** Compare scores with other players online.
-- **Multiplayer Mode:** Compete with friends in real-time.
-
 ## Contributing
 
 We encourage contributions and suggestions to improve the game! If you have ideas, changes, or new features you'd like to add, we'd love to hear from you and collaborate.
