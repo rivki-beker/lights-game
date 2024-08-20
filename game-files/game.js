@@ -1,28 +1,29 @@
 //--------------------log-in-----------------------------------
 logIn();
 function logIn() {
-    document.getElementById("login").addEventListener("click", () => document.getElementById("log-in-music").play())//הפעלת מוזיקה
-    const userDetails = { userName: "", password: "" };//מאתחלים את פרטי משתמש ברירת מחדל
+    document.getElementById("login").addEventListener("click", () => document.getElementById("log-in-music").play()) // Play music
+    const userDetails = { userName: "", password: "" }; // Initialize default user details
     localStorage.setItem(JSON.stringify(userDetails), 0);
-    document.getElementById("login").style.display = 'flex';//הלוג-אין מוצג
+    document.getElementById("login").style.display = 'flex'; // Display the login screen
     var inputs = document.querySelectorAll("form input");
-    inputs[0].addEventListener("blur", checkValidation);//הוספת אירוע - ולידציה
+    inputs[0].addEventListener("blur", checkValidation); // Add validation event
     inputs[1].addEventListener("blur", checkValidation);
-    document.querySelector("form").addEventListener("submit", () => { //הוספת אירוע בעת שליחה
-        displayNone("login");//מסתיר את הלוג-אין 
-        document.getElementById("out").style.display = "block";//הצגת טעינת המשחק
-        setTimeout("start()", 2000);//התחלת המשחק בעוד שתי שניות כולל מוזיקה
+    document.querySelector("form").addEventListener("submit", () => { // Add event on submit
+        displayNone("login"); // Hide the login screen
+        document.getElementById("out").style.display = "block"; // Display game loading
+        setTimeout("start()", 2000); // Start the game in two seconds with music
         document.getElementById("log-in-music").pause();
         document.getElementById("game-process-music").play();
     });
 }
-function checkValidation() {//בדיקת תקינות אין אפשרות להכניס רק שם או סיסמה
+
+function checkValidation() { // Validation check - both fields must be filled or empty
     let password = document.querySelector("form input[type=password]");
     let name = document.querySelector("form input[type=text]");
-    if (name.value != "" & password.value == "") {
+    if (name.value != "" && password.value == "") {
         password.setCustomValidity("you must enter a password or delete your name");
     }
-    else if (name.value == "" & password.value != "") {
+    else if (name.value == "" && password.value != "") {
         name.setCustomValidity("you must enter your name or delete password");
     }
     else {
@@ -30,24 +31,28 @@ function checkValidation() {//בדיקת תקינות אין אפשרות להכ
         password.setCustomValidity("");
     }
 }
-function displayNone(elementId) {//הסתרת הלוג-אין או התוצאות לפי השליחה
+
+function displayNone(elementId) { // Hide login or results after submission
     document.querySelector("#" + elementId + "> :first-child").classList.add("smallAnimate");
     setTimeout(() => document.getElementById(elementId).style.display = 'none', 200);
     setTimeout(() => document.querySelector("#" + elementId + "> :first-child").classList.remove("smallAnimate"), 300);
 }
+
 //--------------------game-------------------------------------
 let score, time, games, victories, timerOn;
 const arr = document.querySelectorAll("img"), arrLights = [arr.length], arrPlayer = [arr.length];
 for (let index = 1; index <= arr.length; index++) {
-    document.getElementById(index).addEventListener("click", userLight);//הוספת אירוע לכל החלונות
+    document.getElementById(index).addEventListener("click", userLight); // Add event to all windows
 }
+
 function start() {
-    document.getElementById("out").style.display = "none";//מפסיק את הטעינה
-    init();//איתחול
-    timerOn = setInterval("timer()", 1000);//הפעלת הטיימר
-    lightOn();//הפעלת הפונקציה שמדליקה את החלונות
+    document.getElementById("out").style.display = "none"; // Stop loading
+    init(); // Initialize
+    timerOn = setInterval("timer()", 1000); // Start the timer
+    lightOn(); // Call the function that turns on the lights
 }
-function init() {//אתחול הערכים
+
+function init() { // Initialize values
     document.getElementById("timer").style.color = "rgb(255, 213, 61)";
     document.getElementById("timer").innerHTML = "01:00";
     score = 0;
@@ -59,6 +64,7 @@ function init() {//אתחול הערכים
         arrPlayer[index] = 0;
     }
 }
+
 function timer() {
     if (time >= 10)
         document.getElementById("timer").innerHTML = "00:" + time;
@@ -70,32 +76,35 @@ function timer() {
         finish();
     time--;
 }
+
 function lightOn() {
-    clearInterval(timerOn);//מפסיק את הטיימר
+    clearInterval(timerOn); // Stop the timer
     document.getElementById("timer").removeAttribute("class");
     let numOfLights = score / 15 + 3, rand;
-    for (let index = 0; index < numOfLights; index++) {//מדליקה אורות בצורה אקראית
+    for (let index = 0; index < numOfLights; index++) { // Turn on lights randomly
         rand = Math.floor(Math.random() * arr.length) + 1;
         while (arrLights[rand] == 1)
             rand = Math.floor(Math.random() * arr.length) + 1;
         arrLights[rand] = 1;
         document.getElementById(rand).src = "images/on.jpg";
     }
-    setTimeout("clear()", numOfLights * 1200 / document.querySelector("form select").value);//(כיבוי אורות בעוד זמן מסוים (לפי מספר האורות והרמה
+    setTimeout("clear()", numOfLights * 1200 / document.querySelector("form select").value); // Turn off lights after a certain time (based on the number of lights and level)
 }
+
 let checkOn;
-function clear() {//פונקציה שמכבה את האורות
+
+function clear() { // Function that turns off the lights
     timerOn = setInterval("timer()", 1000);
     document.getElementById("timer").setAttribute("class", "light");
     games++;
     for (let index = 1; index <= arr.length; index++) {
         document.getElementById(index).src = "images/off.jpg";
     }
-    //שולח לבדיקה בעוד זמן מסוים אם לא נגמר הזמן מוריד אוטומטית חמש נקודות ומפעיל את פונקצית סיום שלב
-    checkOn = setTimeout(()=>{score -= 5; endStage();}, 5000 + score * 120 / document.querySelector("form select").value);
+    // Check automatically if time hasn't run out, deduct 5 points, and end the stage
+    checkOn = setTimeout(() => { score -= 5; endStage(); }, 5000 + score * 120 / document.querySelector("form select").value);
 }
 
-function userLight() {//מדליק או מכבה בכל לחיצה
+function userLight() { // Toggle lights on or off with each click
     if (arrPlayer[event.target.id] == 0) {
         event.target.src = "images/on.jpg";
         arrPlayer[event.target.id] = 1;
@@ -104,21 +113,21 @@ function userLight() {//מדליק או מכבה בכל לחיצה
         event.target.src = "images/off.jpg";
         arrPlayer[event.target.id] = 0;
     }
-    //אם המשתמש גמר להקיש נכונה אז הוא עובר לניסיון הבא
+    // If the user finishes correctly, they move on to the next attempt
     let index = 1;
     for (; index < arrPlayer.length; index++) {
         if (arrPlayer[index] != arrLights[index])
             break;
     }
     if (index == arrPlayer.length) {
-        score += 10;//עדכון הנקודות
-        victories++;//עדכון הנצחונות
-        clearTimeout(checkOn);//מניעת הבדיקה האוטמטית כשנגמר הזמן
-        setTimeout("endStage()", 200);//מציג לשניה את החלון האחרון שנדלק כדי שהמשתמש יראה את התוצאה של הלחיצה
+        score += 10; // Update score
+        victories++; // Update victories
+        clearTimeout(checkOn); // Prevent automatic check when time runs out
+        setTimeout("endStage()", 200); // Briefly display the last lit window so the user can see the result
     }
 }
 
-function endStage() {//סיום שלב - מכבה את האורות
+function endStage() { // End of stage - turn off the lights
     for (let index = 1; index <= arr.length; index++) {
         document.getElementById(index).src = "images/off.jpg";
         arrPlayer[index] = 0;
@@ -127,20 +136,21 @@ function endStage() {//סיום שלב - מכבה את האורות
     if (time > 0)
         lightOn();
 }
+
 function finish() {
     document.getElementById("game-process-music").load();
     document.getElementById("result-music").play();
-    clearInterval(timerOn);//מפסיק את הטיימר
-    document.getElementById("timer").innerHTML = "";//מסתיר את הטיימר
-    document.getElementById("results").style.display = "flex";//הצגת התוצאות
-    document.querySelector("#results button").addEventListener("click", () => {//הוסת אירוע בעת לחיצה על התחלת המשחק מחדש
+    clearInterval(timerOn); // Stop the timer
+    document.getElementById("timer").innerHTML = ""; // Hide the timer
+    document.getElementById("results").style.display = "flex"; // Display the results
+    document.querySelector("#results button").addEventListener("click", () => { // Add event when clicking on restart game
         displayNone("results");
         document.getElementById("out").style.display = "block";
         setTimeout("start()", 2000);
         document.getElementById("result-music").load();
         document.getElementById("game-process-music").play();
     });
-    //מציג את התוצאות ומעדכן את האיחסון המקומי
+    // Display results and update local storage
     document.getElementById("scores").innerHTML = score;
     document.getElementById("victories").innerHTML = victories + "/" + games;
     let currentUserName = document.querySelector("form input[type=text]").value;
